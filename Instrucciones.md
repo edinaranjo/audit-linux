@@ -25,27 +25,7 @@ El objetivo principal **no consiste únicamente en incrementar el Hardening Inde
 
 La secuencia de análisis será:
 
-```text
-Resultado de Lynis
-        ↓
-Candidato a hallazgo
-        ↓
-Verificación independiente
-        ↓
-Condición confirmada
-        ↓
-Comparación con un criterio
-        ↓
-Identificación del riesgo
-        ↓
-Probabilidad × Impacto
-        ↓
-Hallazgo de auditoría
-        ↓
-Remediación
-        ↓
-Verificación
-```
+
 ```mermaid
 flowchart TD
 
