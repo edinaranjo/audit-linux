@@ -424,6 +424,10 @@ La cuenta evaluada posee capacidades administrativas sobre el servidor, por lo q
 R = 3 \times 4 = 12
 \]
 
+$$
+R = 3 \times 4 = 12
+$$
+
 **Nivel: Alto**
 
 ### Recomendación gerencial
