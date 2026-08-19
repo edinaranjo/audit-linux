@@ -1,52 +1,24 @@
-# 🔐 Trabajo Grupal: Auditoría y Hardening de Rocky Linux con Lynis
+# 🔐 Trabajo Grupal: Auditoría de Seguridad y Hardening de Rocky Linux con Lynis
 
 ## Auditoría de Sistemas de Información
 
 ---
 
-## 1. Descripción del trabajo
+# 1. Descripción del trabajo
 
-En este trabajo se realizará una **auditoría técnica de seguridad sobre un servidor Rocky Linux**, utilizando **Lynis** como herramienta de apoyo.
+En este trabajo se realizará una **auditoría técnica de seguridad sobre un servidor Rocky Linux**, utilizando **Lynis** como herramienta de apoyo para la identificación de condiciones que requieran análisis adicional.
 
-La Máquina Virtual (MV) con Rocky Linux será **proporcionada por el docente** y constituirá el entorno oficial sobre el cual deberá desarrollarse el trabajo.
+La Máquina Virtual (MV) con **Rocky Linux será proporcionada por el docente** y constituirá el entorno oficial sobre el cual deberá desarrollarse el trabajo.
 
-> ⚠️ **No se deberá reinstalar, actualizar, modificar o realizar hardening sobre la MV antes de obtener la auditoría inicial.**
+> ⚠️ **No se deberá actualizar, modificar, aplicar hardening ni instalar componentes adicionales antes de obtener la auditoría inicial.**
 
-El objetivo del trabajo no consiste únicamente en ejecutar Lynis o incrementar su **Hardening Index**. El estudiante deberá asumir el rol de **auditor de sistemas**, interpretar la evidencia obtenida, investigar las condiciones detectadas, contrastarlas con criterios reconocidos, evaluar los riesgos y comunicar sus conclusiones utilizando lenguaje gerencial.
+El objetivo del trabajo **no consiste únicamente en ejecutar Lynis, corregir configuraciones o incrementar el Hardening Index**.
 
-El proceso general será:
+El estudiante deberá asumir el rol de **auditor de sistemas**, transformando los resultados técnicos obtenidos en información útil para la toma de decisiones:
 
-```text
-Rocky Linux proporcionado por el docente
-                 ↓
-          Auditoría Lynis T0
-                 ↓
-        Resultados / Suggestions
-                 ↓
-       Investigación y evidencia
-                 ↓
-       Comparación con criterios
-                 ↓
-          Análisis de riesgo
-                 ↓
-       ¿Constituye un hallazgo?
-                 ↓
-       Recomendación gerencial
-                 ↓
-        Hardening completo SSH
-                 ↓
-          Auditoría Lynis T1
-                 ↓
-       Actualización del sistema
-                 ↓
-          Auditoría Lynis T2
-                 ↓
-        Comparación T0/T1/T2
-                 ↓
-           Riesgo residual
-                 ↓
-        Conclusiones de auditoría
-```
+**Resultado Lynis** → **Investigación** → **Evidencia** → **Criterio** → **Desviación** → **Riesgo** → **Conclusión del auditor** → **Recomendación**
+
+Posteriormente se realizará un proceso técnico controlado de **hardening de SSH**, seguido de una actualización del sistema, con el propósito de analizar cómo estas acciones modifican el estado de seguridad observado por Lynis.
 
 ---
 
@@ -54,85 +26,102 @@ Rocky Linux proporcionado por el docente
 
 Al finalizar el trabajo, el estudiante estará en capacidad de:
 
-- Ejecutar una auditoría técnica de seguridad sobre Rocky Linux utilizando Lynis.
-- Interpretar los resultados obtenidos sin asumir que una sugerencia constituye automáticamente una vulnerabilidad.
-- Obtener evidencia independiente para validar las condiciones identificadas.
-- Utilizar documentación oficial, benchmarks y estándares como criterios de auditoría.
-- Diferenciar entre **resultado técnico, vulnerabilidad, riesgo, hallazgo y recomendación**.
-- Evaluar riesgos mediante probabilidad e impacto.
-- Comunicar hallazgos técnicos utilizando lenguaje comprensible para niveles gerenciales.
-- Relacionar las condiciones identificadas con controles de seguridad pertinentes.
-- Realizar y verificar un proceso de hardening de OpenSSH.
-- Evaluar el efecto de las actualizaciones del sistema sobre los resultados de seguridad.
-- Comparar diferentes estados del servidor mediante evidencia objetiva.
-- Evaluar el riesgo residual posterior al tratamiento.
-- Elaborar conclusiones sustentadas en evidencia y juicio profesional.
+* Ejecutar una auditoría técnica de seguridad sobre Rocky Linux mediante Lynis.
+* Interpretar críticamente los resultados obtenidos.
+* Diferenciar entre una **sugerencia técnica, una debilidad, una vulnerabilidad, un riesgo y un hallazgo de auditoría**.
+* Verificar de forma independiente las condiciones identificadas por una herramienta automatizada.
+* Utilizar documentación oficial, benchmarks y estándares como criterios de auditoría.
+* Determinar si una condición corresponde a un **hallazgo, observación/oportunidad de mejora o resultado no aplicable**.
+* Evaluar riesgos mediante probabilidad e impacto.
+* Comunicar hallazgos técnicos mediante lenguaje comprensible para niveles gerenciales.
+* Relacionar condiciones técnicas con controles de ISO/IEC 27001:2022, ISO/IEC 27002, CIS Benchmarks u otros estándares pertinentes.
+* Ejecutar y verificar un proceso de hardening de OpenSSH.
+* Evaluar separadamente el efecto del hardening SSH y de la actualización del sistema.
+* Analizar el riesgo residual posterior al tratamiento.
+* Emitir conclusiones sustentadas en evidencia y juicio profesional.
 
 ---
 
-# 3. Modalidad
+# 3. Modalidad del trabajo
 
 El trabajo será desarrollado en **grupos de tres estudiantes**.
 
-Todos los grupos utilizarán una MV Rocky Linux con las mismas características iniciales.
+Todos los grupos utilizarán una MV Rocky Linux con el mismo estado inicial.
 
-Esto permite mantener condiciones comparables:
+Cada grupo recibirá **cinco controles o sugerencias de Lynis asignados por el docente**.
 
-$$
-\text{Mismo entorno inicial} + \text{Misma herramienta} = \text{Baseline comparable}
-$$
+Las recomendaciones correspondientes a **SSH no formarán parte de estos cinco controles**, debido a que el hardening de SSH será una actividad común para todos los grupos.
 
-Cada grupo recibirá adicionalmente un conjunto de **sugerencias de Lynis asignadas por el docente**.
-
-Las sugerencias relacionadas con SSH no formarán parte de esta distribución, debido a que el **hardening de SSH será una actividad común y obligatoria para todos los grupos**.
+> 🎓 **Nivel académico esperado**
+>
+> Debido a que cada grupo analizará únicamente **cinco controles**, se espera que el desarrollo de cada uno sea profundo, fundamentado y acorde con el nivel de un estudiante de maestría.
+>
+> No se considerará suficiente describir superficialmente la recomendación de Lynis o copiar información encontrada en Internet.
+>
+> Cada análisis deberá demostrar:
+>
+> * investigación;
+> * evidencia;
+> * capacidad de interpretación;
+> * selección y aplicación de criterios;
+> * análisis de riesgo;
+> * juicio profesional;
+> * capacidad de comunicación gerencial.
 
 ---
 
 # 4. Escenario de auditoría
 
-Para efectos del análisis se utilizará el siguiente escenario organizacional:
+Para efectos del trabajo se utilizará el siguiente escenario organizacional:
 
-> La organización **ACME Financial Services** utiliza el servidor `SRV-LNX-02`, basado en Rocky Linux, como servidor corporativo para soportar servicios internos de TI.
+> La organización **ACME Financial Services** utiliza el servidor `SRV-LNX-02`, basado en Rocky Linux, para soportar servicios internos de TI.
 >
 > El servidor procesa y almacena información corporativa de carácter confidencial y es administrado remotamente mediante SSH por personal autorizado.
 >
-> La organización requiere mantener niveles adecuados de confidencialidad, integridad, disponibilidad y trazabilidad. Los accesos administrativos deben encontrarse debidamente restringidos y las actividades relevantes deben poder ser registradas y posteriormente auditadas.
+> La organización requiere mantener niveles adecuados de confidencialidad, integridad, disponibilidad y trazabilidad.
 >
-> El equipo de Auditoría de Sistemas ha sido solicitado para evaluar la configuración de seguridad del servidor, identificar exposiciones relevantes y emitir recomendaciones para reducir los riesgos encontrados.
+> Los accesos administrativos deben encontrarse debidamente restringidos y las actividades relevantes deben poder ser registradas y posteriormente auditadas.
+>
+> El equipo de Auditoría de Sistemas ha sido solicitado para evaluar la configuración de seguridad del servidor, identificar exposiciones relevantes y formular recomendaciones para reducir los riesgos encontrados.
+
+Este escenario deberá utilizarse como contexto para la evaluación de probabilidad e impacto.
 
 ---
 
 # 5. Reglas del laboratorio
 
-Antes de comenzar:
+Antes de iniciar:
 
 1. Utilizar exclusivamente la MV proporcionada por el docente.
-2. No realizar actualizaciones antes de obtener el baseline.
-3. No realizar hardening previo.
-4. No modificar configuraciones antes de la primera auditoría.
-5. No eliminar paquetes o servicios antes del baseline.
+2. No actualizar el sistema antes de obtener el baseline.
+3. No aplicar hardening previo.
+4. No modificar archivos de configuración.
+5. No instalar o eliminar paquetes antes de la primera auditoría.
 6. Mantener evidencia de las actividades realizadas.
-7. No asumir que una recomendación de Lynis constituye automáticamente un hallazgo.
+7. Utilizar las cinco sugerencias asignadas por el docente.
+8. No asumir que una recomendación de Lynis constituye automáticamente una vulnerabilidad.
+9. No asumir que una recomendación constituye automáticamente un hallazgo.
+10. Documentar todas las fuentes utilizadas.
 
-> La MV contiene una configuración diseñada exclusivamente para fines académicos y no representa necesariamente una configuración recomendada para producción.
+> La máquina virtual corresponde a un entorno académico controlado y no representa necesariamente una configuración recomendada para producción.
 
 ---
 
 # 6. Preparación de Lynis
 
-Utilizar el repositorio oficial:
+Clonar el repositorio oficial:
 
 ```bash
 git clone https://github.com/CISOfy/lynis.git
 ```
 
-Acceder:
+Acceder al directorio:
 
 ```bash
 cd lynis
 ```
 
-Si los archivos pertenecen al usuario utilizado para clonar el repositorio, cambiar su propietario antes de ejecutar Lynis con privilegios elevados:
+Cambiar la propiedad del repositorio antes de ejecutar Lynis con privilegios elevados:
 
 ```bash
 cd ..
@@ -163,44 +152,51 @@ Esta ejecución constituye:
 
 Registrar como mínimo:
 
-| Indicador | T0 |
-|---|---:|
-| Hardening Index | |
-| Tests performed | |
-| Warnings | |
-| Suggestions | |
+| Indicador       | T0 |
+| --------------- | -: |
+| Hardening Index |    |
+| Tests performed |    |
+| Warnings        |    |
+| Suggestions     |    |
 
-Conservar la salida y los archivos generados por Lynis como evidencia.
+Conservar adicionalmente:
+
+```text
+/var/log/lynis.log
+/var/log/lynis-report.dat
+```
+
+y la salida completa de la ejecución.
 
 ---
 
-# 8. Principio fundamental del análisis
+# 8. Principio fundamental del trabajo
 
-Una recomendación de Lynis debe interpretarse inicialmente como un **elemento que requiere investigación**.
-
-No utilizar:
+No utilizar la siguiente interpretación:
 
 ```text
 Suggestion = Vulnerabilidad = Hallazgo
 ```
 
-Utilizar:
+La metodología correcta será:
 
-**Suggestion** → **Investigación** → **Evidencia** → **Criterio** → **Riesgo** → **Conclusión del auditor**
+**Suggestion** → **Investigación** → **Evidencia** → **Criterio** → **Desviación** → **Riesgo** → **Conclusión**
 
-Por tanto:
+Una Suggestion constituye inicialmente un:
 
-> **Lynis identifica condiciones técnicas. El auditor determina su relevancia.**
+> **Candidato para investigación.**
+
+Posteriormente el auditor podrá clasificar el resultado como:
+
+1. **Hallazgo**
+2. **Observación / oportunidad de mejora**
+3. **No aplica / descartado**
 
 ---
 
-# 9. Análisis de las sugerencias asignadas
+# 9. Análisis de los cinco controles asignados
 
-Cada grupo recibirá del docente un conjunto de sugerencias identificadas durante la auditoría.
-
-Las recomendaciones relacionadas con SSH serán excluidas de esta distribución porque serán tratadas posteriormente como actividad común.
-
-Para **cada sugerencia asignada**, el grupo deberá desarrollar el siguiente análisis.
+Para cada control o sugerencia asignada deberán desarrollarse las siguientes etapas.
 
 ---
 
@@ -210,66 +206,72 @@ Registrar:
 
 ```text
 ID Lynis:
-Nombre de la prueba:
+Categoría:
 Descripción de la sugerencia:
 ```
 
 ---
 
-## 9.2 ¿Qué indica la sugerencia?
+## 9.2 Interpretación
 
 Explicar con palabras propias:
 
-- qué componente está evaluando Lynis;
-- qué condición detectó;
-- por qué podría ser relevante.
+* qué componente evalúa Lynis;
+* qué condición detectó;
+* cuál es el propósito del control;
+* por qué podría ser relevante para el escenario organizacional.
 
-No copiar únicamente la descripción generada por la herramienta.
+No copiar únicamente el texto de Lynis.
 
 ---
 
-## 9.3 Verificación independiente
+# 10. Verificación independiente
 
-El auditor deberá comprobar si la condición existe realmente.
+El auditor deberá verificar si la condición reportada existe realmente.
 
-La evidencia puede incluir:
+La evidencia podrá obtenerse mediante:
 
-- comandos;
-- archivos de configuración;
-- estado de servicios;
-- paquetes instalados;
-- permisos;
-- logs;
-- parámetros del kernel;
-- configuraciones efectivas.
+* comandos;
+* archivos de configuración;
+* permisos;
+* paquetes instalados;
+* parámetros del kernel;
+* estado de servicios;
+* logs;
+* configuraciones efectivas.
 
 Ejemplo:
 
 ```bash
-<comando utilizado>
+<comando de verificación>
 ```
 
-Registrar la salida relevante.
+Se deberá explicar:
 
-> Una captura de Lynis por sí sola no constituye evidencia suficiente cuando la condición puede verificarse directamente.
+> **¿Qué demuestra exactamente esta evidencia?**
+
+Una captura de pantalla de Lynis no será considerada por sí sola evidencia suficiente cuando la condición pueda verificarse directamente.
 
 ---
 
-# 10. Determinación del criterio
+# 11. Determinación del criterio
 
-Una vez confirmada la condición deberá determinarse:
+Una condición solamente puede evaluarse adecuadamente cuando existe un estado esperado contra el cual compararla.
 
-> **¿Contra qué criterio se está comparando el servidor?**
+La pregunta fundamental será:
+
+> **¿Cómo debería encontrarse configurado este componente y qué fuente sustenta esta afirmación?**
 
 La investigación deberá priorizar:
 
 1. Documentación oficial de Rocky Linux.
-2. Manuales del componente evaluado.
-3. CIS Benchmark aplicable.
-4. Documentación oficial de Lynis/CISOfy.
-5. ISO/IEC 27001:2022 e ISO/IEC 27002, cuando corresponda.
-6. Otros estándares reconocidos pertinentes.
-7. Fuentes técnicas secundarias confiables.
+2. Documentación oficial del componente.
+3. Manuales del sistema.
+4. CIS Benchmark aplicable.
+5. Documentación oficial de Lynis/CISOfy.
+6. ISO/IEC 27001:2022 e ISO/IEC 27002, cuando corresponda.
+7. NIST u otros estándares reconocidos.
+8. Fuentes técnicas secundarias confiables.
 
 Ejemplos:
 
@@ -279,37 +281,70 @@ man login.defs
 man auditd
 ```
 
-> Wikipedia, blogs sin referencias, respuestas generadas automáticamente o foros no deberán utilizarse como único criterio de auditoría.
+No se considerarán fuentes suficientes por sí solas:
+
+* Wikipedia;
+* blogs sin referencias;
+* foros;
+* respuestas generadas automáticamente;
+* contenido sin autor o procedencia verificable.
 
 ---
 
-# 11. Relación con estándares y controles
+# 12. Identificación de la desviación
 
-Para cada condición deberá identificarse:
+Una vez identificados:
 
-> **El control del Anexo A de ISO/IEC 27001:2022 u otro estándar/baseline de seguridad que pueda utilizarse como criterio o referencia para el tratamiento de la condición.**
+* **Condición actual**
+* **Criterio esperado**
 
-La asociación deberá ser **justificada**.
-
-No se considerará suficiente:
+comparar:
 
 ```text
-ISO 27001: A.x.x
+CONDICIÓN ACTUAL
+        vs.
+CRITERIO ESPERADO
 ```
 
-Se espera una explicación como:
+Responder:
 
-> La condición se relaciona con el control XXXXX debido a que dicho control busca...
+> **¿Existe realmente una desviación?**
 
-Para configuraciones técnicas específicas podrá resultar más apropiado utilizar un **CIS Benchmark**, documentación del fabricante u otro baseline técnico.
+Si no existe desviación, probablemente no existe hallazgo.
 
 ---
 
-# 12. Análisis del riesgo
+# 13. Identificación del riesgo
 
-Una condición confirmada no adquiere criticidad únicamente por el estado mostrado por Lynis.
+Si existe una desviación, responder:
 
-La criticidad será determinada mediante:
+> **¿Qué podría ocurrir si la condición permanece sin tratamiento?**
+
+El riesgo deberá expresarse como un escenario y no simplemente como el nombre de la debilidad.
+
+Ejemplo incorrecto:
+
+> Riesgo: firewall deshabilitado.
+
+Ejemplo correcto:
+
+> La ausencia de filtrado local podría permitir conexiones hacia servicios no autorizados, incrementando la posibilidad de explotación o acceso no autorizado al servidor.
+
+Considerar posibles afectaciones sobre:
+
+* confidencialidad;
+* integridad;
+* disponibilidad;
+* trazabilidad;
+* cumplimiento;
+* continuidad;
+* operación.
+
+---
+
+# 14. Evaluación de probabilidad e impacto
+
+Se utilizará:
 
 $$
 R = P \times I
@@ -317,49 +352,49 @@ $$
 
 donde:
 
-- **P = Probabilidad**
-- **I = Impacto**
-- **R = Nivel de riesgo**
+* **P = Probabilidad**
+* **I = Impacto**
+* **R = Nivel de riesgo**
 
 ---
 
-## 12.1 Probabilidad
+## 14.1 Probabilidad
 
-| Valor | Nivel | Descripción |
-|---:|---|---|
-| 1 | Muy baja | El escenario es poco probable dadas las condiciones existentes. |
-| 2 | Baja | Puede ocurrir, pero requiere condiciones poco frecuentes. |
-| 3 | Media | Existen condiciones razonables para que ocurra. |
-| 4 | Alta | Existen condiciones favorables y exposición relevante. |
-| 5 | Muy alta | La exposición es permanente o el escenario resulta altamente probable. |
-
----
-
-## 12.2 Impacto
-
-| Valor | Nivel | Descripción |
-|---:|---|---|
-| 1 | Insignificante | Consecuencias mínimas para la organización. |
-| 2 | Menor | Afectación limitada y fácilmente recuperable. |
-| 3 | Moderado | Afectación relevante pero controlable. |
-| 4 | Mayor | Afectación significativa al servicio, información o negocio. |
-| 5 | Crítico | Consecuencias severas sobre servicios esenciales, información o cumplimiento. |
+| Valor | Nivel    | Descripción                                                            |
+| ----: | -------- | ---------------------------------------------------------------------- |
+|     1 | Muy baja | El escenario requiere condiciones altamente improbables.               |
+|     2 | Baja     | Puede ocurrir, pero requiere condiciones poco frecuentes.              |
+|     3 | Media    | Existen condiciones razonables para que ocurra.                        |
+|     4 | Alta     | Existen condiciones favorables y exposición relevante.                 |
+|     5 | Muy alta | La exposición es permanente o el escenario resulta altamente probable. |
 
 ---
 
-## 12.3 Clasificación
+## 14.2 Impacto
 
-| Resultado | Nivel |
-|---:|---|
-| 1–4 | Bajo |
-| 5–9 | Medio |
-| 10–16 | Alto |
-| 17–25 | Crítico |
+| Valor | Nivel          | Descripción                                                        |
+| ----: | -------------- | ------------------------------------------------------------------ |
+|     1 | Insignificante | Consecuencias mínimas.                                             |
+|     2 | Menor          | Afectación limitada y fácilmente recuperable.                      |
+|     3 | Moderado       | Afectación relevante pero controlable.                             |
+|     4 | Mayor          | Afectación significativa al servicio, información o negocio.       |
+|     5 | Crítico        | Consecuencias severas sobre servicios, información o cumplimiento. |
+
+---
+
+## 14.3 Nivel de riesgo
+
+| Resultado | Nivel   |
+| --------: | ------- |
+|       1–4 | Bajo    |
+|       5–9 | Medio   |
+|     10–16 | Alto    |
+|     17–25 | Crítico |
 
 Ejemplo:
 
 $$
-P = 3
+P = 4
 $$
 
 $$
@@ -367,276 +402,206 @@ I = 4
 $$
 
 $$
-R = 3 \times 4 = 12
+R = 4 \times 4 = 16
 $$
 
 **Nivel de riesgo: Alto**
 
-> El valor numérico deberá estar acompañado de una justificación. No se calificará únicamente el número seleccionado.
+> Probabilidad e impacto deberán estar acompañados obligatoriamente por una justificación.
 
 ---
 
-# 13. Determinación del hallazgo
+# 15. Clasificación del resultado
 
-Después de obtener evidencia y analizar el criterio y riesgo, responder:
+Después de analizar la evidencia, criterio, desviación y riesgo, cada control deberá clasificarse como:
 
-> **¿La condición identificada constituye un hallazgo de auditoría para el escenario evaluado?**
+## Hallazgo
 
-```text
-Sí / No
-```
+Existe:
 
-Justificar.
+* condición confirmada;
+* criterio aplicable;
+* desviación;
+* riesgo relevante;
+* evidencia suficiente.
 
-Es perfectamente válido concluir:
+## Observación / oportunidad de mejora
 
-> **No constituye un hallazgo.**
+Existe una condición susceptible de fortalecimiento, pero:
 
-si el grupo demuestra que:
+* no existe incumplimiento claramente demostrado;
+* el riesgo es reducido;
+* no existe criterio obligatorio;
+* representa principalmente una oportunidad de optimización.
 
-- el criterio no resulta aplicable;
-- existe un control compensatorio;
-- la condición no representa una desviación;
-- el riesgo no resulta relevante para el escenario;
-- la recomendación de Lynis no aplica al propósito del servidor.
+## No aplica / descartado
 
-> La capacidad de descartar justificadamente una recomendación también constituye ejercicio de juicio profesional.
+La recomendación:
+
+* no corresponde al escenario;
+* no se confirma mediante evidencia;
+* no posee criterio aplicable;
+* no representa una desviación;
+* no genera un riesgo relevante.
 
 ---
 
-# 14. Comunicación gerencial
+# 16. Comunicación gerencial
 
-Para aquellas condiciones consideradas hallazgos deberá elaborarse una explicación gerencial.
-
-La explicación debe responder:
+Cuando el resultado sea clasificado como **hallazgo**, deberá redactarse una explicación gerencial que responda:
 
 ### ¿Qué ocurre?
 
-Explicar la condición sin terminología Linux innecesaria.
+Explicar la condición de forma comprensible.
 
 ### ¿Por qué importa?
 
-Explicar el riesgo para la organización.
+Relacionarla con el negocio y el riesgo.
 
 ### ¿Qué podría ocurrir?
 
-Describir consecuencias sobre:
+Describir posibles consecuencias.
 
-- confidencialidad;
-- integridad;
-- disponibilidad;
-- trazabilidad;
-- cumplimiento;
-- operación.
+### ¿Qué debería hacerse?
 
-### ¿Qué debería hacer la organización?
+Proponer una recomendación sin limitarse a comandos Linux.
 
-Formular una recomendación comprensible para la administración.
+Ejemplo incorrecto:
 
----
+> Modificar `/etc/ssh/sshd_config` y configurar `MaxSessions 2`.
 
-## Ejemplo de comunicación técnica incorrecta
+Ejemplo gerencial:
 
-> `sshd_config` mantiene MaxSessions=10 y Lynis SSH-7408 recomienda 2.
-
-## Ejemplo de comunicación gerencial
-
-> El servicio utilizado para la administración remota mantiene capacidades superiores a las requeridas para la operación prevista, incrementando innecesariamente la superficie disponible ante el eventual compromiso de una sesión administrativa. Se recomienda limitar las capacidades del servicio al mínimo operacional requerido y verificar periódicamente su configuración.
+> Se recomienda restringir las capacidades del servicio de administración remota al mínimo necesario para la operación, reduciendo configuraciones excesivamente permisivas que podrían incrementar la exposición ante el compromiso de una cuenta administrativa.
 
 ---
 
-# 15. Matriz de análisis
+# 17. Relación con ISO/IEC 27001 u otros estándares
 
-Cada grupo deberá presentar una matriz consolidada:
+Para cada control analizado deberá identificarse:
 
-| ID | Condición | Evidencia | Criterio | Riesgo | P | I | R | Nivel | ¿Hallazgo? |
-|---|---|---|---|---|---:|---:|---:|---|---|
-| XXX | ... | ... | ... | ... |  |  |  |  | Sí/No |
-| XXX | ... | ... | ... | ... |  |  |  |  | Sí/No |
+> **El control de ISO/IEC 27001:2022, ISO/IEC 27002, CIS Benchmark u otro estándar que pueda utilizarse como criterio o referencia para el tratamiento de la condición.**
 
-Posteriormente deberá desarrollarse individualmente cada condición.
+La asociación deberá ser justificada.
+
+No será suficiente indicar:
+
+```text
+ISO 27001 A.x.x
+```
+
+Deberá explicarse:
+
+> Esta condición se relaciona con el control ______ debido a que...
+
+Para configuraciones técnicas específicas, CIS Benchmark o documentación oficial pueden proporcionar criterios más precisos que ISO/IEC 27001.
 
 ---
 
-# 16. Formato de documentación de cada condición
+# 18. Matriz consolidada de los cinco controles
 
-## H-XX — Título
+Cada grupo deberá presentar inicialmente una matriz:
 
-### Resultado de Lynis
+| ID  | Condición | Evidencia | Criterio | Riesgo |  P |  I |  R | Nivel | Clasificación                      |
+| --- | --------- | --------- | -------- | ------ | -: | -: | -: | ----- | ---------------------------------- |
+| XXX | ...       | ...       | ...      | ...    |    |    |    |       | Hallazgo / Observación / No aplica |
+| XXX | ...       | ...       | ...      | ...    |    |    |    |       |                                    |
+| XXX | ...       | ...       | ...      | ...    |    |    |    |       |                                    |
+| XXX | ...       | ...       | ...      | ...    |    |    |    |       |                                    |
+| XXX | ...       | ...       | ...      | ...    |    |    |    |       |                                    |
 
-```text
-ID:
-Suggestion:
-```
+La matriz es un resumen.
 
-### Condición
-
-Describir qué fue identificado.
-
-### Evidencia
-
-```bash
-<comandos utilizados>
-```
-
-Explicar qué demuestra la evidencia.
-
-### Criterio
-
-Indicar:
-
-- estándar;
-- benchmark;
-- documentación;
-- control;
-
-y justificar su aplicabilidad.
-
-### Riesgo
-
-Explicar qué podría ocurrir.
-
-### Probabilidad
-
-```text
-Valor:
-Justificación:
-```
-
-### Impacto
-
-```text
-Valor:
-Justificación:
-```
-
-### Evaluación
-
-$$
-R = P \times I
-$$
-
-```text
-Nivel:
-```
-
-### ¿Constituye hallazgo?
-
-```text
-Sí / No
-```
-
-Justificación:
-
-### Recomendación gerencial
-
-Explicar qué debería hacer la organización.
-
-### Posible solución técnica
-
-Describir las acciones técnicas que podrían implementarse.
-
-> Las sugerencias asignadas para análisis **no deberán ser necesariamente implementadas**. El objetivo de esta fase es actuar como auditor y formular recomendaciones sustentadas.
+El desarrollo completo deberá realizarse posteriormente para cada control.
 
 ---
 
-# 17. Fase 2 — Hardening completo de SSH
+# 19. Fase 2 — Hardening completo de SSH
 
-Todos los grupos realizarán una evaluación y hardening del servicio OpenSSH.
+Todos los grupos deberán realizar una evaluación y hardening de OpenSSH.
 
-Esta fase será común.
-
-## Objetivo
-
-Evaluar la configuración efectiva de SSH y aplicar medidas de hardening apropiadas al escenario.
+Esta actividad será común.
 
 ---
 
-## 17.1 Obtener baseline SSH
+## 19.1 Obtener configuración inicial
 
-Antes de modificar el servicio:
+Ejecutar:
 
 ```bash
 sudo sshd -T
 ```
 
-Guardar la salida:
+Guardar:
 
 ```bash
 sudo sshd -T > ssh_baseline.txt
 ```
 
-Investigar particularmente las recomendaciones `SSH-7408` identificadas por Lynis.
+Identificar las recomendaciones `SSH-7408` generadas por Lynis.
 
-Entre otros parámetros pueden aparecer:
+Entre los parámetros que podrían aparecer se encuentran:
 
 ```text
 AllowTcpForwarding
 AllowAgentForwarding
 ClientAliveCountMax
+ClientAliveInterval
 LogLevel
 MaxAuthTries
 MaxSessions
+PermitRootLogin
 TCPKeepAlive
 X11Forwarding
 ```
 
-> No aplicar valores mecánicamente. Cada configuración deberá investigarse y justificarse.
+> No aplicar valores mecánicamente. Cada modificación deberá tener una justificación técnica y una fuente.
 
 ---
 
-# 18. Backup antes del hardening
+# 20. Matriz de hardening SSH
 
-Antes de modificar SSH:
+Completar:
+
+| Parámetro          | Valor inicial | Valor propuesto | Propósito de seguridad | Fuente |
+| ------------------ | ------------- | --------------- | ---------------------- | ------ |
+| MaxSessions        |               |                 |                        |        |
+| MaxAuthTries       |               |                 |                        |        |
+| X11Forwarding      |               |                 |                        |        |
+| AllowTcpForwarding |               |                 |                        |        |
+| ...                |               |                 |                        |        |
+
+---
+
+# 21. Backup
+
+Antes de modificar:
 
 ```bash
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 ```
 
-Si existen archivos adicionales:
+Revisar:
 
 ```bash
 ls -la /etc/ssh/sshd_config.d/
 ```
 
-conservar evidencia.
-
 ---
 
-# 19. Implementación del hardening SSH
+# 22. Implementación
 
-El grupo deberá:
+Aplicar las configuraciones seleccionadas.
 
-1. Identificar los parámetros recomendados por Lynis.
-2. Consultar documentación oficial.
-3. Determinar un valor apropiado.
-4. Justificarlo.
-5. Implementarlo.
-6. Validar la configuración.
-7. Comprobar la configuración efectiva.
-
-Para cada parámetro:
-
-| Parámetro | Valor inicial | Valor propuesto | Justificación | Fuente |
-|---|---|---|---|---|
-| MaxSessions | | | | |
-| MaxAuthTries | | | | |
-| X11Forwarding | | | | |
-| ... | | | | |
-
----
-
-# 20. Validación de SSH
-
-Antes de recargar o reiniciar SSH:
+Antes de recargar SSH:
 
 ```bash
 sudo sshd -t
 ```
 
-Si existe algún error:
+Si existen errores:
 
-> **NO reiniciar ni recargar el servicio.**
+> ❌ **NO reiniciar ni recargar el servicio.**
 
 Corregir primero la configuración.
 
@@ -646,98 +611,67 @@ Una vez validada:
 sudo systemctl reload sshd
 ```
 
-> En Rocky Linux el nombre habitual del servicio es `sshd`.
-
 Verificar:
 
 ```bash
 sudo systemctl status sshd
 ```
 
-y:
-
-```bash
-sudo sshd -T
-```
-
-Guardar:
+Guardar la nueva configuración efectiva:
 
 ```bash
 sudo sshd -T > ssh_hardened.txt
 ```
 
----
-
-# 21. Comparación SSH
-
-Puede utilizarse:
+Comparar:
 
 ```bash
 diff ssh_baseline.txt ssh_hardened.txt
 ```
 
-Analizar:
-
-> ¿Qué configuraciones cambiaron y qué objetivo de seguridad persigue cada modificación?
-
 ---
 
-# 22. Fase 3 — Auditoría T1
+# 23. Fase 3 — Auditoría T1
 
-Después del hardening SSH, **antes de actualizar Rocky Linux**, ejecutar nuevamente Lynis:
+Después del hardening SSH y **antes de actualizar Rocky Linux**, ejecutar:
 
 ```bash
 sudo ./lynis audit system
 ```
 
-Esta medición constituye:
-
-> **T1 — Estado posterior al hardening SSH**
-
 Registrar:
 
-| Indicador | T0 | T1 | Diferencia |
-|---|---:|---:|---:|
-| Hardening Index | | | |
-| Tests performed | | | |
-| Warnings | | | |
-| Suggestions | | | |
+| Indicador       | T0 | T1 | Diferencia |
+| --------------- | -: | -: | ---------: |
+| Hardening Index |    |    |            |
+| Tests performed |    |    |            |
+| Warnings        |    |    |            |
+| Suggestions     |    |    |            |
 
 Calcular:
 
 $$
-\Delta HI_{SSH}=HI_{T1}-HI_{T0}
+\Delta HI_{SSH} = HI_{T1} - HI_{T0}
 $$
 
----
+Analizar:
 
-# 23. Análisis del hardening SSH
-
-Responder:
-
-1. ¿Qué recomendaciones SSH desaparecieron?
-2. ¿Cuáles permanecieron?
-3. ¿Por qué podrían permanecer?
-4. ¿Cambió el Hardening Index?
-5. ¿En qué magnitud?
-6. ¿Puede concluirse que SSH es completamente seguro?
-7. ¿Qué riesgos permanecen?
-
-> La ausencia de una sugerencia en Lynis constituye evidencia útil, pero no demuestra por sí sola la eliminación total del riesgo.
+* qué recomendaciones SSH desaparecieron;
+* cuáles permanecieron;
+* cómo cambió el Hardening Index;
+* qué riesgos permanecen.
 
 ---
 
-# 24. Fase 4 — Actualización de Rocky Linux
+# 24. Fase 4 — Actualización del sistema
 
-Una vez obtenida T1, realizar la actualización del sistema.
-
-Antes:
+Después de obtener T1:
 
 ```bash
 sudo dnf check-update
 ```
 
-Registrar la evidencia.
+Conservar evidencia.
 
 Posteriormente:
 
@@ -745,17 +679,24 @@ Posteriormente:
 sudo dnf upgrade
 ```
 
-Confirmar la operación cuando corresponda.
+Documentar:
 
-> La actualización deberá realizarse **después de T1** para poder diferenciar su efecto del hardening SSH.
+* cantidad de paquetes actualizados;
+* componentes relevantes;
+* necesidad de reinicio;
+* cambios observados.
 
-Si la actualización incluye componentes que requieren reinicio, documentarlo y proceder de manera controlada.
+Si corresponde, reiniciar:
+
+```bash
+sudo reboot
+```
 
 ---
 
-# 25. Verificación posterior a la actualización
+# 25. Verificación posterior
 
-Registrar:
+Después del reinicio:
 
 ```bash
 cat /etc/rocky-release
@@ -769,325 +710,425 @@ uname -r
 sudo dnf check-update
 ```
 
-Documentar:
-
-- paquetes actualizados;
-- cambios relevantes;
-- necesidad o no de reinicio;
-- estado final.
-
 ---
 
 # 26. Fase 5 — Auditoría T2
 
-Ejecutar por tercera vez:
+Ejecutar nuevamente:
 
 ```bash
 sudo ./lynis audit system
 ```
 
-Esta medición constituye:
-
-> **T2 — Estado posterior a la actualización**
-
 Registrar:
 
-| Indicador | T0 Baseline | T1 SSH | T2 Actualizado |
-|---|---:|---:|---:|
-| Hardening Index | | | |
-| Tests performed | | | |
-| Warnings | | | |
-| Suggestions | | | |
+| Indicador       | T0 Baseline | T1 SSH | T2 Actualizado |
+| --------------- | ----------: | -----: | -------------: |
+| Hardening Index |             |        |                |
+| Tests performed |             |        |                |
+| Warnings        |             |        |                |
+| Suggestions     |             |        |                |
 
 ---
 
-# 27. Análisis comparativo
-
-Calcular:
+# 27. Comparación T0 / T1 / T2
 
 ### Efecto del hardening SSH
 
 $$
-\Delta HI_{SSH}=HI_{T1}-HI_{T0}
+\Delta HI_{SSH} = HI_{T1} - HI_{T0}
 $$
 
-### Efecto posterior de la actualización
+### Efecto de la actualización
 
 $$
-\Delta HI_{Update}=HI_{T2}-HI_{T1}
+\Delta HI_{Update} = HI_{T2} - HI_{T1}
 $$
 
 ### Variación total
 
 $$
-\Delta HI_{Total}=HI_{T2}-HI_{T0}
+\Delta HI_{Total} = HI_{T2} - HI_{T0}
 $$
 
-También puede calcularse:
+### Mejora relativa
 
 $$
-\text{Mejora relativa}=
-\frac{HI_{T2}-HI_{T0}}
-{HI_{T0}}
-\times100
+\text{Mejora relativa} =
+\frac{HI_{T2}-HI_{T0}}{HI_{T0}}
+\times 100
 $$
 
 ---
 
 # 28. Interpretación del Hardening Index
 
-El Hardening Index deberá utilizarse como **indicador comparativo**, no como certificación de seguridad.
-
 No concluir:
 
-> “El servidor obtuvo 80 puntos, por tanto está 80 % seguro.”
-
-Tampoco:
-
-> “El servidor ahora es seguro porque aumentó el Hardening Index.”
+> El servidor obtuvo 80 puntos, por tanto está 80 % seguro.
 
 Interpretación correcta:
 
-> El indicador permite observar cambios en el nivel de hardening detectado por las pruebas de Lynis entre diferentes estados del mismo servidor.
+> El Hardening Index permite comparar el grado de hardening detectado por Lynis entre diferentes estados del mismo servidor.
 
 Por tanto:
 
 $$
 \Delta HI > 0
 \not\Rightarrow
-\text{ausencia de riesgo}
+\text{Sistema completamente seguro}
 $$
 
 ---
 
-# 29. Riesgo residual
+# 29. Riesgo residual del hardening SSH
 
-Para el hardening SSH deberá analizarse el riesgo antes y después del tratamiento.
-
-Ejemplo:
+Evaluar el riesgo antes y después del tratamiento.
 
 ### Riesgo inicial
 
 $$
-R_i=P_i\times I_i
+R_i = P_i \times I_i
 $$
 
 ### Riesgo residual
 
 $$
-R_r=P_r\times I_r
+R_r = P_r \times I_r
 $$
 
 Presentar:
 
-| Riesgo | P | I | Nivel |
-|---|---:|---:|---|
-| Inicial | | | |
-| Residual | | | |
+| Estado   |  P |  I | Riesgo |
+| -------- | -: | -: | ------ |
+| Inicial  |    |    |        |
+| Residual |    |    |        |
 
-Responder:
+Explicar:
 
 > ¿Por qué el riesgo residual no necesariamente llega a cero?
 
 ---
 
-# 30. Análisis de la actualización del sistema
+# 30. Actualización vs. hardening
 
-El grupo deberá responder en lenguaje gerencial:
-
-### 1. ¿Por qué es importante mantener actualizado un servidor?
-
-### 2. ¿Qué riesgos puede generar operar con software desactualizado?
-
-Considerar:
-
-- vulnerabilidades conocidas;
-- estabilidad;
-- soporte;
-- exposición;
-- compatibilidad;
-- cumplimiento.
-
-### 3. ¿Actualizar elimina todas las vulnerabilidades?
-
-Justificar.
-
-### 4. ¿La actualización modificó el Hardening Index?
-
-Explicar por qué sí o por qué no.
-
-### 5. ¿Qué diferencia existe entre actualización y hardening?
-
-Esta pregunta es especialmente importante.
+El grupo deberá demostrar que comprende la diferencia:
 
 ```text
-Actualización
-        ≠
-Hardening
+Actualización ≠ Hardening
 ```
 
-La actualización busca, entre otros objetivos, incorporar correcciones y versiones mantenidas.
+### Actualización
 
-El hardening busca reducir la superficie de ataque y configurar el sistema de acuerdo con un baseline de seguridad.
+Busca, entre otros objetivos:
 
-Ambas actividades son complementarias.
+* corregir vulnerabilidades conocidas;
+* incorporar correcciones;
+* mantener versiones soportadas;
+* mejorar estabilidad.
 
----
+### Hardening
 
-# 31. Análisis gerencial del hardening SSH
+Busca:
 
-El grupo deberá elaborar una conclusión destinada a la gerencia explicando:
+* reducir superficie de ataque;
+* eliminar funcionalidades innecesarias;
+* restringir configuraciones permisivas;
+* fortalecer controles;
+* acercar el sistema a un baseline de seguridad.
 
-- por qué SSH constituye un servicio relevante;
-- qué riesgo representa una configuración excesivamente permisiva;
-- qué medidas fueron implementadas;
-- qué evidencia demuestra la mejora;
-- qué riesgos permanecen;
-- qué recomendaciones adicionales deberían considerarse.
+Ambas actividades son:
 
-> No incluir comandos Linux en esta sección.
-
----
-
-# 32. Conclusiones generales
-
-El grupo deberá presentar conclusiones sustentadas en la evidencia obtenida.
-
-Como mínimo deberán abordar:
-
-1. Estado inicial del servidor.
-2. Principales riesgos identificados.
-3. Diferencia entre sugerencias de Lynis y hallazgos de auditoría.
-4. Importancia de validar independientemente los resultados.
-5. Impacto del hardening SSH.
-6. Impacto de la actualización.
-7. Variación del Hardening Index.
-8. Limitaciones del Hardening Index.
-9. Riesgos residuales.
-10. Importancia del juicio profesional del auditor.
-
-Evitar conclusiones genéricas como:
-
-> “La práctica fue interesante y aprendimos mucho sobre Linux.”
-
-Las conclusiones deberán derivarse de **evidencia obtenida durante la auditoría**.
+> **Complementarias, no equivalentes.**
 
 ---
 
-# 33. Estructura del informe
-
-El informe final deberá contener:
+# 31. Estructura del informe final
 
 ## 1. Portada
 
-- Institución
-- Asignatura
-- Trabajo
-- Integrantes
-- Fecha
+* Institución
+* Asignatura
+* Trabajo
+* Integrantes
+* Fecha
 
 ## 2. Resumen ejecutivo
 
 Máximo una página.
 
-Debe permitir a un lector gerencial comprender:
+Debe permitir que un lector gerencial comprenda:
 
-- qué se auditó;
-- qué se encontró;
-- cuáles son los principales riesgos;
-- qué acciones se realizaron;
-- cuál fue el resultado general.
+* qué se auditó;
+* principales resultados;
+* riesgos relevantes;
+* acciones realizadas;
+* conclusión general.
 
-## 3. Alcance
+## 3. Objetivo y alcance
 
-Describir:
+## 4. Escenario organizacional
 
-- servidor evaluado;
-- herramienta;
-- alcance técnico;
-- limitaciones.
+## 5. Metodología
 
-## 4. Metodología
+## 6. Auditoría inicial T0
 
-Explicar:
+## 7. Matriz de los cinco controles asignados
 
-```text
-Lynis
-→ Evidencia
-→ Criterio
-→ Riesgo
-→ Hallazgo
-→ Recomendación
-```
+## 8. Desarrollo individual de los cinco controles
 
-## 5. Auditoría inicial T0
+## 9. Hardening SSH
 
-Presentar resultados principales.
+## 10. Auditoría T1
 
-## 6. Análisis de las sugerencias asignadas
+## 11. Actualización del sistema
 
-Incluir matriz y análisis individual.
+## 12. Auditoría T2
 
-## 7. Hardening SSH
+## 13. Comparación T0 / T1 / T2
 
-Documentar:
+## 14. Análisis de riesgo residual
 
-- baseline;
-- análisis;
-- configuración;
-- evidencia;
-- validación.
+## 15. Conclusiones generales
 
-## 8. Auditoría T1
+## 16. Referencias
 
-Analizar el efecto del hardening.
-
-## 9. Actualización
-
-Documentar proceso y resultados.
-
-## 10. Auditoría T2
-
-Presentar resultados finales.
-
-## 11. Comparación T0/T1/T2
-
-Incluir métricas y análisis.
-
-## 12. Riesgo residual
-
-Analizar especialmente SSH.
-
-## 13. Conclusiones
-
-Orientadas a auditoría y riesgo.
-
-## 14. Referencias
-
-Documentar todas las fuentes utilizadas.
-
-## 15. Anexos
-
-Incluir evidencia técnica relevante.
+## 17. Anexos técnicos
 
 ---
 
-# 34. Evidencias mínimas
+# 32. Ejemplo del formato esperado del entregable
 
-El informe deberá contener evidencia suficiente para demostrar:
+A continuación se presenta un ejemplo completo.
 
-- auditoría T0;
-- Suggestions asignadas;
-- verificaciones independientes;
-- configuración SSH inicial;
-- configuración SSH final;
-- validación `sshd -t`;
-- auditoría T1;
-- actualización del sistema;
-- auditoría T2;
-- resultados finales.
+> ⚠️ Este ejemplo tiene únicamente fines didácticos. Los estudiantes deberán realizar su propio análisis sobre los controles asignados.
 
-> No llenar el cuerpo principal del informe con capturas innecesarias. Las evidencias extensas deberán incluirse como anexos.
+---
+
+## H-01 — Ausencia de firewall local activo
+
+### 1. Resultado de Lynis
+
+```text
+Configure a firewall/packet filter to filter incoming and outgoing traffic
+[FIRE-4590]
+```
+
+---
+
+### 2. Interpretación de la sugerencia
+
+Lynis identificó que el servidor no dispone de un mecanismo local activo de filtrado de tráfico que permita restringir explícitamente las conexiones de red.
+
+La ausencia de firewall local no significa automáticamente que el servidor se encuentre comprometido, pero requiere verificar cuáles servicios están expuestos y si existen otros mecanismos de filtrado en la infraestructura.
+
+---
+
+### 3. Evidencia independiente
+
+Se ejecutaron:
+
+```bash
+sudo firewall-cmd --state
+```
+
+```bash
+sudo firewall-cmd --list-all
+```
+
+```bash
+sudo ss -tulpn
+```
+
+Resultado observado:
+
+```text
+Firewall local no activo.
+Existen servicios escuchando interfaces de red.
+```
+
+La evidencia confirma la condición identificada por Lynis.
+
+---
+
+### 4. Condición
+
+El servidor no dispone de un firewall local activo que restrinja las conexiones entrantes y salientes según los servicios autorizados.
+
+---
+
+### 5. Criterio
+
+El principio de **mínimo privilegio y reducción de superficie de ataque** establece que únicamente deben permitirse comunicaciones de red necesarias para el funcionamiento del servicio.
+
+Como criterio técnico pueden utilizarse:
+
+* documentación oficial de Rocky Linux;
+* CIS Benchmark aplicable;
+* políticas corporativas de seguridad;
+* controles de seguridad relacionados con protección de redes.
+
+---
+
+### 6. Desviación
+
+El estado actual permite que la exposición de servicios dependa únicamente de su configuración individual o de controles externos, sin existir filtrado local complementario.
+
+Por tanto:
+
+```text
+Condición actual ≠ Estado esperado
+```
+
+Se confirma una desviación.
+
+---
+
+### 7. Riesgo
+
+La ausencia de filtrado local podría permitir conexiones hacia servicios innecesariamente expuestos, incrementando la superficie de ataque y facilitando intentos de explotación o acceso no autorizado al servidor.
+
+---
+
+### 8. Probabilidad
+
+**4 — Alta**
+
+#### Justificación
+
+El servidor se encuentra conectado a una red corporativa y posee servicios de red activos. La ausencia de filtrado local incrementa la posibilidad de que un servicio quede accesible desde segmentos desde los cuales no debería ser utilizado.
+
+---
+
+### 9. Impacto
+
+**4 — Mayor**
+
+#### Justificación
+
+La explotación de un servicio expuesto podría permitir acceso no autorizado, ejecución de acciones sobre el servidor o compromiso de información corporativa.
+
+Debido a que el servidor procesa información confidencial, el impacto podría afectar principalmente confidencialidad e integridad.
+
+---
+
+### 10. Evaluación del riesgo
+
+$$
+R = P \times I
+$$
+
+$$
+R = 4 \times 4 = 16
+$$
+
+**Nivel de riesgo: Alto**
+
+---
+
+### 11. Clasificación
+
+**Hallazgo**
+
+#### Justificación
+
+La condición:
+
+* fue confirmada mediante evidencia;
+* posee un criterio aplicable;
+* presenta una desviación frente al estado esperado;
+* genera un riesgo relevante;
+* puede ser sustentada técnicamente.
+
+---
+
+### 12. Asociación con estándares
+
+La condición puede relacionarse con controles asociados a la **seguridad de redes** y a la protección de los sistemas frente a comunicaciones no autorizadas.
+
+La asociación específica deberá justificarse de acuerdo con la versión del estándar utilizada durante el curso.
+
+Como criterio técnico complementario resulta apropiado utilizar el CIS Benchmark correspondiente a Rocky Linux/RHEL.
+
+---
+
+### 13. Recomendación gerencial
+
+> Se recomienda implementar controles locales de filtrado de tráfico que permitan únicamente las comunicaciones necesarias para la operación del servidor, complementando los controles existentes en la infraestructura de red. Las reglas implementadas deberán responder al principio de mínimo privilegio y ser revisadas periódicamente para evitar exposiciones innecesarias.
+
+---
+
+### 14. Posible solución técnica
+
+Una posible alternativa consiste en implementar `firewalld`.
+
+La configuración exacta dependerá de los servicios autorizados.
+
+Por ejemplo, si únicamente fuera necesario permitir administración mediante SSH:
+
+```bash
+sudo systemctl enable --now firewalld
+```
+
+Verificar:
+
+```bash
+sudo firewall-cmd --state
+```
+
+Revisar servicios permitidos:
+
+```bash
+sudo firewall-cmd --list-all
+```
+
+> El auditor recomienda el control. La configuración específica deberá ser definida y aprobada por los responsables de administración de acuerdo con los requerimientos operacionales.
+
+---
+
+### 15. Conclusión gerencial
+
+> La ausencia de filtrado local incrementa innecesariamente la exposición del servidor ante conexiones provenientes de la red corporativa. Considerando que el equipo procesa información confidencial y dispone de servicios accesibles mediante red, la condición representa un riesgo alto y requiere tratamiento prioritario.
+
+---
+
+# 33. Ejemplo de matriz correspondiente
+
+| ID        | Condición               | Evidencia                   | Criterio                           | Riesgo                              |  P |  I |  R | Nivel | Clasificación |
+| --------- | ----------------------- | --------------------------- | ---------------------------------- | ----------------------------------- | -: | -: | -: | ----- | ------------- |
+| FIRE-4590 | Firewall local inactivo | `firewall-cmd`, `ss -tulpn` | CIS / política de seguridad de red | Exposición innecesaria de servicios |  4 |  4 | 16 | Alto  | **Hallazgo**  |
+| XXX       | ...                     | ...                         | ...                                | ...                                 |    |    |    |       |               |
+| XXX       | ...                     | ...                         | ...                                | ...                                 |    |    |    |       |               |
+| XXX       | ...                     | ...                         | ...                                | ...                                 |    |    |    |       |               |
+| XXX       | ...                     | ...                         | ...                                | ...                                 |    |    |    |       |               |
+
+---
+
+# 34. Conclusiones generales del informe
+
+Las conclusiones deberán derivarse de los resultados obtenidos.
+
+No utilizar:
+
+> La práctica fue interesante y nos permitió aprender Linux.
+
+Utilizar conclusiones orientadas a auditoría:
+
+> La evaluación evidenció que varias recomendaciones identificadas automáticamente por Lynis requieren interpretación antes de ser consideradas hallazgos. La validación independiente permitió distinguir condiciones relevantes de simples oportunidades de mejora y asignar prioridades basadas en riesgo.
+
+Las conclusiones deberán abordar:
+
+* estado inicial;
+* principales riesgos;
+* controles clasificados como hallazgos;
+* controles clasificados como observaciones;
+* controles descartados;
+* efecto del hardening SSH;
+* efecto de la actualización;
+* evolución del Hardening Index;
+* riesgo residual;
+* limitaciones de la herramienta;
+* importancia del juicio profesional.
 
 ---
 
@@ -1097,75 +1138,85 @@ Priorizar:
 
 ### Rocky Linux Documentation
 
+```text
 https://docs.rockylinux.org/
+```
 
 ### Lynis
 
+```text
 https://cisofy.com/lynis/
+```
 
 ### Lynis Controls
 
+```text
 https://cisofy.com/lynis/controls/
+```
 
 ### CIS Benchmarks
 
+```text
 https://www.cisecurity.org/cis-benchmarks
+```
 
 ### OpenSSH
 
+```text
 https://www.openssh.com/
+```
 
-### ISO/IEC 27001
+### ISO/IEC 27001 e ISO/IEC 27002
 
-Utilizar la versión y controles indicados por el docente.
+Utilizar las versiones y referencias indicadas por el docente.
 
 ---
 
-# 36. Criterios de calidad
+# 36. Criterios de calidad académica
 
-Un trabajo de alto nivel académico deberá demostrar:
+El trabajo deberá demostrar:
 
 ### Evidencia
 
-Las afirmaciones están respaldadas por información obtenida del servidor.
+Las afirmaciones están sustentadas mediante evidencia obtenida del servidor.
 
 ### Criterio
 
-Las conclusiones se comparan con referencias pertinentes.
+Las conclusiones se comparan contra referencias pertinentes.
+
+### Profundidad
+
+Cada uno de los cinco controles es investigado suficientemente.
 
 ### Análisis
 
-El estudiante explica **por qué** una condición representa un riesgo.
+No se limita a describir qué encontró Lynis.
 
 ### Juicio profesional
 
-No se acepta automáticamente cada sugerencia de Lynis como hallazgo.
+Se determina razonadamente si una condición constituye hallazgo.
+
+### Riesgo
+
+Probabilidad e impacto están justificados.
 
 ### Comunicación
 
-Se diferencia claramente entre lenguaje técnico y gerencial.
+Se diferencian claramente lenguaje técnico y gerencial.
 
 ### Trazabilidad
 
-Es posible relacionar:
+Debe ser posible seguir:
 
-```text
-Resultado Lynis
-       ↓
-Evidencia
-       ↓
-Criterio
-       ↓
-Riesgo
-       ↓
-Hallazgo
-       ↓
-Recomendación
-```
+**Resultado Lynis** → **Evidencia** → **Criterio** → **Riesgo** → **Clasificación** → **Recomendación**
+
+### Fuentes
+
+Las recomendaciones se encuentran respaldadas por fuentes reconocidas.
 
 ### Reproducibilidad
 
-Otro auditor debería poder comprender cómo se obtuvo la evidencia y repetir las verificaciones realizadas.
+Otro auditor debería poder repetir las verificaciones realizadas.
 
 ---
 
@@ -1173,69 +1224,47 @@ Otro auditor debería poder comprender cómo se obtuvo la evidencia y repetir la
 
 ❌ Considerar todas las Suggestions como vulnerabilidades.
 
-❌ Asignar criticidad directamente según el estado mostrado por Lynis.
+❌ Considerar todas las Suggestions como hallazgos.
 
-❌ Utilizar únicamente Lynis como evidencia.
+❌ Asignar criticidad según el estado mostrado por Lynis.
 
 ❌ Copiar literalmente la explicación de Lynis.
 
-❌ Proponer una solución sin citar un criterio o fuente técnica.
+❌ Utilizar únicamente Lynis como evidencia.
 
-❌ Asignar Probabilidad e Impacto sin justificación.
+❌ Asignar probabilidad e impacto sin justificar.
 
-❌ Considerar que incrementar el Hardening Index demuestra seguridad total.
-
-❌ Reiniciar SSH sin validar previamente la configuración.
-
-❌ Actualizar antes de obtener T0 y T1.
-
-❌ Confundir actualización con hardening.
-
-❌ Considerar que un control elimina completamente el riesgo.
+❌ Citar un control ISO sin explicar la relación.
 
 ❌ Presentar comandos Linux como recomendación gerencial.
 
----
+❌ Actualizar Rocky Linux antes de obtener T0 y T1.
 
-# 38. Preguntas finales de reflexión
+❌ Reiniciar SSH sin validar previamente la configuración.
 
-Cada grupo deberá responder:
+❌ Confundir actualización con hardening.
 
-### 1.
-¿Por qué una herramienta automatizada como Lynis no puede sustituir el juicio profesional de un auditor?
+❌ Interpretar el Hardening Index como porcentaje de seguridad.
 
-### 2.
-¿Todas las recomendaciones identificadas por Lynis representan el mismo nivel de riesgo?
-
-### 3.
-¿Encontraron alguna sugerencia que, después del análisis, no consideraron un hallazgo? Justifique.
-
-### 4.
-¿Qué diferencia existe entre una debilidad técnica y un riesgo para el negocio?
-
-### 5.
-¿Qué aportó el hardening SSH al estado de seguridad del servidor?
-
-### 6.
-¿Qué aportó la actualización del sistema?
-
-### 7.
-¿Por qué actualización y hardening son controles complementarios?
-
-### 8.
-¿Un Hardening Index elevado permite concluir que un sistema es seguro?
-
-### 9.
-¿Qué riesgos permanecieron después de las acciones realizadas?
-
-### 10.
-Si este servidor estuviera en producción, ¿qué tres acciones recomendaría prioritariamente a la gerencia y por qué?
+❌ Asumir que una remediación elimina completamente el riesgo.
 
 ---
 
-# 39. Principio central del trabajo
+# 38. Principio central del trabajo
 
-> **Lynis no realiza la auditoría por el auditor. Lynis proporciona evidencia técnica que debe ser interpretada, validada y contextualizada. El valor profesional del auditor se encuentra en transformar esa evidencia en información útil para la toma de decisiones.**
+> **Lynis no realiza la auditoría por el auditor.**
+
+La herramienta identifica condiciones.
+
+El auditor:
+
+* verifica;
+* interpreta;
+* compara;
+* evalúa;
+* prioriza;
+* concluye;
+* comunica.
 
 Por tanto:
 
@@ -1243,8 +1272,199 @@ Por tanto:
 
 ---
 
-# 40. Resultado esperado
+# Apéndice A — Criterios para determinar si una condición constituye un hallazgo
 
-Al finalizar el trabajo, el grupo deberá ser capaz de demostrar que:
+## A.1 Regla general
 
-> No se limitó a ejecutar una herramienta de hardening, sino que realizó un proceso estructurado de auditoría técnica, obtuvo evidencia, evaluó riesgos, formuló conclusiones y verificó objetivamente el efecto de acciones de seguridad sobre un servidor Linux.
+Una condición podrá considerarse un hallazgo cuando existan:
+
+```text
+Condición confirmada
+        +
+Criterio aplicable
+        +
+Desviación
+        +
+Riesgo relevante
+        +
+Evidencia suficiente
+```
+
+Conceptualmente:
+
+$$
+\text{Hallazgo} =
+\text{Condición}
++
+\text{Criterio}
++
+\text{Desviación}
++
+\text{Riesgo}
++
+\text{Evidencia}
+$$
+
+---
+
+## A.2 Pregunta 1 — ¿La condición existe?
+
+Debe poder demostrarse mediante evidencia.
+
+### Sí
+
+Continuar.
+
+### No
+
+Clasificar como:
+
+> **No aplica / descartado**
+
+---
+
+## A.3 Pregunta 2 — ¿Existe un criterio aplicable?
+
+Debe existir una referencia que permita determinar cómo debería encontrarse el sistema.
+
+Puede provenir de:
+
+* política;
+* procedimiento;
+* contrato;
+* legislación;
+* estándar;
+* benchmark;
+* documentación oficial;
+* baseline técnico.
+
+### Sí
+
+Continuar.
+
+### No
+
+La condición podría clasificarse como:
+
+> **Observación / oportunidad de mejora**
+
+pero difícilmente como incumplimiento formal.
+
+---
+
+## A.4 Pregunta 3 — ¿Existe desviación?
+
+Comparar:
+
+```text
+Condición observada
+        vs.
+Criterio esperado
+```
+
+### No existe diferencia
+
+No existe hallazgo.
+
+### Existe diferencia
+
+Continuar.
+
+---
+
+## A.5 Pregunta 4 — ¿La desviación genera un riesgo relevante?
+
+Preguntar:
+
+> ¿Qué podría ocurrir si no se corrige?
+
+Si no puede identificarse una consecuencia razonable, se deberá reconsiderar su clasificación.
+
+---
+
+## A.6 Pregunta 5 — ¿Existe evidencia suficiente?
+
+El auditor deberá poder demostrar:
+
+* qué encontró;
+* cómo lo verificó;
+* qué criterio utilizó;
+* cuál es la desviación;
+* qué riesgo existe.
+
+Si no puede sustentarlo:
+
+> **No debería formularse todavía como hallazgo.**
+
+---
+
+## A.7 Árbol de decisión
+
+```mermaid
+flowchart TD
+
+    A["🛡️ Resultado de Lynis"] --> B["🔎 Candidato a análisis"]
+    B --> C["🧪 Verificación independiente"]
+
+    C --> D{"¿La condición existe?"}
+
+    D -->|"No"| X["📁 No aplica / descartado"]
+    D -->|"Sí"| E["📚 Identificar criterio"]
+
+    E --> F{"¿Existe criterio aplicable?"}
+
+    F -->|"No"| Y["📌 Observación / oportunidad de mejora"]
+    F -->|"Sí"| G["⚖️ Comparar condición vs. criterio"]
+
+    G --> H{"¿Existe desviación?"}
+
+    H -->|"No"| X
+    H -->|"Sí"| I["⚠️ Identificar riesgo"]
+
+    I --> J{"¿El riesgo es relevante?"}
+
+    J -->|"No"| Y
+    J -->|"Sí"| K["📊 Probabilidad × Impacto"]
+
+    K --> L["📝 HALLAZGO"]
+```
+
+---
+
+## A.8 Clasificaciones posibles
+
+| Clasificación   | Condición          | Criterio                 | Desviación | Riesgo relevante |
+| --------------- | ------------------ | ------------------------ | ---------- | ---------------- |
+| **Hallazgo**    | Sí                 | Sí                       | Sí         | Sí               |
+| **Observación** | Sí                 | Parcial / No obligatorio | Posible    | Bajo o limitado  |
+| **No aplica**   | No / No pertinente | No                       | No         | No               |
+
+---
+
+## A.9 Cinco preguntas de validación
+
+Antes de clasificar una condición como hallazgo, responder:
+
+1. **¿Puedo demostrar técnicamente que la condición existe?**
+2. **¿Existe un criterio aplicable que indique cómo debería encontrarse?**
+3. **¿Existe una desviación entre la condición actual y el criterio?**
+4. **¿La desviación genera un riesgo relevante para el escenario?**
+5. **¿Tengo evidencia suficiente para sustentar la conclusión?**
+
+Si las cinco respuestas son afirmativas:
+
+> ✅ **Existe fundamento suficiente para formular un hallazgo.**
+
+Si alguna respuesta es negativa:
+
+> ⚠️ **Debe reconsiderarse la clasificación.**
+
+---
+
+## A.10 Principio final
+
+> **Una Suggestion de Lynis constituye el inicio de la investigación, no la conclusión de la auditoría.**
+
+El valor profesional del auditor se encuentra en determinar:
+
+> **qué significa la evidencia, cuál es su relevancia para la organización y qué decisión debería tomarse frente al riesgo identificado.**
