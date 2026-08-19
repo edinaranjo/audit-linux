@@ -781,32 +781,106 @@ $$
 
 ---
 
-# 29. Riesgo residual del hardening SSH
+# 29. Análisis de riesgo del servicio SSH
 
-Evaluar el riesgo antes y después del tratamiento.
+El hardening de SSH deberá complementarse con un análisis de riesgo que permita
+determinar cómo las configuraciones identificadas afectan el riesgo antes y
+después del tratamiento.
 
-### Riesgo inicial
+> **Importante:** SSH no constituye por sí mismo un riesgo. El análisis debe
+> centrarse en las condiciones de configuración identificadas y en los
+> escenarios que podrían derivarse de ellas.
+
+## 29.1. Identificación de condiciones
+
+Consolidar las recomendaciones SSH identificadas:
+
+| Parámetro | Condición inicial | Estado esperado | Implicación de seguridad |
+|---|---|---|---|
+| MaxAuthTries | | | |
+| MaxSessions | | | |
+| X11Forwarding | | | |
+| AllowTcpForwarding | | | |
+| ... | | | |
+
+## 29.2. Escenario de riesgo
+
+Responder:
+
+**¿Qué podría ocurrir debido a las condiciones identificadas?**
+
+Redactar un escenario de riesgo consolidado.
+
+Ejemplo:
+
+> Una configuración insuficientemente endurecida del servicio SSH podría
+> incrementar la exposición del servidor ante intentos de acceso no autorizado
+> o ampliar las capacidades disponibles ante el compromiso de una cuenta
+> administrativa, afectando la confidencialidad, integridad o disponibilidad
+> de la información y servicios.
+
+## 29.3. Riesgo inicial
+
+Determinar y justificar:
+
+**Probabilidad inicial:**
+
+$$
+P_i = ?
+$$
+
+Justificación:
+
+> ...
+
+**Impacto inicial:**
+
+$$
+I_i = ?
+$$
+
+Justificación:
+
+> ...
+
+Calcular:
 
 $$
 R_i = P_i \times I_i
 $$
 
-### Riesgo residual
+## 29.4. Tratamiento
+
+Documentar las configuraciones implementadas y explicar cómo cada una contribuye
+a reducir el escenario de riesgo.
+
+## 29.5. Riesgo residual
+
+Después del hardening determinar:
 
 $$
 R_r = P_r \times I_r
 $$
 
+Justificar nuevamente probabilidad e impacto.
+
 Presentar:
 
-| Estado   |  P |  I | Riesgo |
-| -------- | -: | -: | ------ |
-| Inicial  |    |    |        |
-| Residual |    |    |        |
+| Estado | Probabilidad | Impacto | Riesgo | Nivel |
+|---|---:|---:|---:|---|
+| T0 - Antes del hardening | | | | |
+| T1 - Después del hardening | | | | |
 
-Explicar:
+## 29.6. Análisis
 
-> ¿Por qué el riesgo residual no necesariamente llega a cero?
+Responder:
+
+- ¿Qué condiciones de riesgo fueron reducidas?
+- ¿Por qué cambió la probabilidad?
+- ¿Cambió el impacto? Justifique.
+- ¿Qué riesgos permanecen?
+- ¿Por qué el riesgo residual no es cero?
+- ¿Se considera aceptable el riesgo residual para el escenario planteado?
 
 ---
 
