@@ -239,9 +239,9 @@ Por ejemplo, 33 resultados `[INSEGURO]` **no significan 33 vulnerabilidades crí
 
 Para efectos didácticos se utilizará:
 
-\[
+$$
 R = P \times I
-\]
+$$
 
 donde:
 
