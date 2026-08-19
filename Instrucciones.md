@@ -599,9 +599,9 @@ Su impacto se relaciona principalmente con aspectos de política, advertencia y 
 
 ### Riesgo
 
-\[
+$$
 R = 2 \times 2 = 4
-\]
+$$
 
 **Nivel: Bajo**
 
@@ -611,9 +611,9 @@ R = 2 \times 2 = 4
 
 ### Riesgo residual
 
-\[
+$$
 R_r = 1 \times 2 = 2
-\]
+$$
 
 **Riesgo residual: Bajo**
 
