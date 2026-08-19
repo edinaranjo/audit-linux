@@ -518,12 +518,6 @@ El desarrollo completo deberá realizarse posteriormente para cada control.
 
 # 19. Fase 2 — Hardening completo de SSH
 
-Todos los grupos deberán realizar una evaluación y hardening de OpenSSH.
-
-Esta actividad será común.
-
-# 29. Análisis de riesgo del servicio SSH
-
 El hardening de SSH deberá complementarse con un análisis de riesgo que permita
 determinar cómo las configuraciones identificadas afectan el riesgo antes y
 después del tratamiento.
@@ -532,7 +526,7 @@ después del tratamiento.
 > centrarse en las condiciones de configuración identificadas y en los
 > escenarios que podrían derivarse de ellas.
 
-## 29.1. Identificación de condiciones
+## 19.1. Identificación de condiciones
 
 Consolidar las recomendaciones SSH identificadas:
 
@@ -544,7 +538,7 @@ Consolidar las recomendaciones SSH identificadas:
 | AllowTcpForwarding | | | |
 | ... | | | |
 
-## 29.2. Escenario de riesgo
+## 19.2. Escenario de riesgo
 
 Responder:
 
@@ -560,7 +554,7 @@ Ejemplo:
 > administrativa, afectando la confidencialidad, integridad o disponibilidad
 > de la información y servicios.
 
-## 29.3. Riesgo inicial
+## 19.3. Riesgo inicial
 
 Determinar y justificar:
 
@@ -590,12 +584,12 @@ $$
 R_i = P_i \times I_i
 $$
 
-## 29.4. Tratamiento
+## 19.4. Tratamiento
 
 Documentar las configuraciones implementadas y explicar cómo cada una contribuye
 a reducir el escenario de riesgo.
 
-## 29.5. Riesgo residual
+## 19.5. Riesgo residual
 
 Después del hardening determinar:
 
@@ -612,7 +606,7 @@ Presentar:
 | T0 - Antes del hardening | | | | |
 | T1 - Después del hardening | | | | |
 
-## 29.6. Análisis
+## 19.6. Análisis
 
 Responder:
 
