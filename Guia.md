@@ -320,21 +320,6 @@ Evidencia suficiente
 Conceptualmente:
 
 $$
-\text{Hallazgo}
-===============
-
-\text{Condición}
-+
-\text{Criterio}
-+
-\text{Desviación}
-+
-\text{Riesgo}
-+
-\text{Evidencia}
-$$
-
-$$
 \begin{aligned}
 \text{Hallazgo} &= \text{Condición} \\
 &+ \text{Criterio} \\
