@@ -446,10 +446,6 @@ Probabilidad: **2**
 
 Impacto: **4**
 
-\[
-R_r = 2 \times 4 = 8
-\]
-
 $$
 R_r = 2 \times 4 = 8
 $$
@@ -738,9 +734,9 @@ En caso de compromiso de credenciales o sesiones administrativas, una configurac
 
 ### Riesgo
 
-\[
+$$
 R = 2 \times 3 = 6
-\]
+$$
 
 **Nivel: Medio**
 
@@ -754,9 +750,9 @@ Probabilidad: **1**
 
 Impacto: **3**
 
-\[
+$$
 R_r = 1 \times 3 = 3
-\]
+$$
 
 **Riesgo residual: Bajo**
 
@@ -888,9 +884,9 @@ La pérdida de trazabilidad puede afectar investigaciones de incidentes, atribuc
 
 ### Riesgo
 
-\[
+$$
 R = 3 \times 4 = 12
-\]
+$$
 
 **Nivel: Alto**
 
@@ -908,9 +904,9 @@ Probabilidad: **2**
 
 Impacto: **4**
 
-\[
+$$
 R_r = 2 \times 4 = 8
-\]
+$$
 
 **Riesgo residual: Medio**
 
