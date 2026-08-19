@@ -450,6 +450,10 @@ Impacto: **4**
 R_r = 2 \times 4 = 8
 \]
 
+$$
+R_r = 2 \times 4 = 8
+$$
+
 **Riesgo residual: Medio**
 
 ---
