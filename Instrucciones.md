@@ -938,44 +938,44 @@ Registrar nuevamente:
 
 Calcular:
 
-\[
+$$
 \Delta HI = HI_{final} - HI_{inicial}
-\]
+$$
 
 Ejemplo:
 
-\[
+$$
 HI_{inicial}=63
-\]
+$$
 
-\[
+$$
 HI_{final}=68
-\]
+$$
 
 entonces:
 
-\[
+$$
 \Delta HI=68-63=5
-\]
+$$
 
 La mejora relativa puede expresarse como:
 
-\[
+$$
 \text{Mejora relativa} =
 \frac{HI_{final}-HI_{inicial}}
 {HI_{inicial}}
 \times100
-\]
+$$
 
 > **Importante:** un incremento del Hardening Index no demuestra por sí mismo que el servidor sea seguro.
 
 Por tanto:
 
-\[
+$$
 \Delta HI > 0
 \not\Rightarrow
 \text{Sistema completamente seguro}
-\]
+$$
 
 ---
 
@@ -1166,7 +1166,7 @@ Al finalizar la práctica, el estudiante deberá comprender que:
 
 2. Una sugerencia de Lynis constituye inicialmente un elemento que debe ser investigado:
 
-\[
+$$
 \text{Suggestion}
 \rightarrow
 \text{Investigación}
@@ -1176,13 +1176,13 @@ Al finalizar la práctica, el estudiante deberá comprender que:
 \text{Criterio}
 \rightarrow
 \text{Riesgo}
-\]
+$$
 
 3. Dos sugerencias de Lynis pueden representar niveles de riesgo completamente diferentes.
 
 4. La criticidad debe determinarse considerando:
 
-\[
+$$
 \text{Activo}
 +
 \text{Amenaza}
@@ -1192,7 +1192,7 @@ Al finalizar la práctica, el estudiante deberá comprender que:
 \text{Controles}
 +
 \text{Contexto organizacional}
-\]
+$$
 
 5. La implementación de un control debe ser verificada mediante evidencia.
 
