@@ -46,6 +46,61 @@ Remediación
         ↓
 Verificación
 ```
+```mermaid
+flowchart TD
+
+    A["🛡️ <b>Resultado de Lynis</b>"]
+    B["🔎 <b>Candidato a hallazgo</b>"]
+    C["🧪 <b>Verificación independiente</b>"]
+    D{"❓ <b>¿La condición está confirmada?</b>"}
+
+    X["📁 <b>Documentar y descartar</b><br/>No existe evidencia suficiente"]
+
+    E["📚 <b>Comparar con criterio</b>"]
+    F{"⚖️ <b>¿Existe desviación relevante?</b>"}
+
+    Y["📌 <b>Documentar observación</b><br/>No se formula hallazgo"]
+
+    G["⚠️ <b>Identificar riesgo</b>"]
+    H["📊 <b>Evaluar riesgo</b><br/>Probabilidad × Impacto"]
+    I["📝 <b>Formular hallazgo</b><br/>Condición + criterio + evidencia + riesgo"]
+    J["🛠️ <b>Remediación</b>"]
+    K["🔁 <b>Verificación posterior</b><br/>Efectividad + riesgo residual"]
+
+    A --> B
+    B --> C
+    C --> D
+
+    D -->|"No"| X
+    D -->|"Sí"| E
+
+    E --> F
+    F -->|"No"| Y
+    F -->|"Sí"| G
+
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+
+    classDef tool fill:#E3F2FD,stroke:#1976D2,stroke-width:2px,color:#111;
+    classDef verify fill:#E8F5E9,stroke:#388E3C,stroke-width:2px,color:#111;
+    classDef decision fill:#FFF8E1,stroke:#F9A825,stroke-width:2px,color:#111;
+    classDef risk fill:#FFF3E0,stroke:#EF6C00,stroke-width:2px,color:#111;
+    classDef finding fill:#FCE4EC,stroke:#C2185B,stroke-width:2px,color:#111;
+    classDef action fill:#EDE7F6,stroke:#673AB7,stroke-width:2px,color:#111;
+    classDef discard fill:#ECEFF1,stroke:#607D8B,stroke-width:2px,color:#111;
+
+    class A,B tool;
+    class C,E verify;
+    class D,F decision;
+    class G,H risk;
+    class I finding;
+    class J,K action;
+    class X,Y discard;
+```
+
+
 
 ---
 
