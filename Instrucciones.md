@@ -1079,9 +1079,9 @@ Justificación:
 
 ### 8. Nivel de riesgo
 
-\[
+$$
 R=P\times I
-\]
+$$
 
 ### 9. Conclusión del auditor
 
@@ -1107,9 +1107,9 @@ Demostrar que el control fue implementado.
 
 ### 13. Riesgo residual
 
-\[
+$$
 R_r=P_r\times I_r
-\]
+$$
 
 ---
 
