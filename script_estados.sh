@@ -1,14 +1,14 @@
-
 #!/bin/bash
 
-# ------------------------------------------------------------
-# Script para contar los estados encontrados en una salida Lynis
+# ============================================================
+# Conteo de estados encontrados en una auditoría Lynis
+#
 # Uso:
 #   ./script_estados.sh auditoria1.txt
-# ------------------------------------------------------------
+# ============================================================
 
 if [ $# -ne 1 ]; then
-    echo "ERROR: Debe indicar el archivo de auditoría."
+    echo "ERROR: Debe proporcionar el archivo generado por Lynis."
     echo
     echo "Uso:"
     echo "  $0 <archivo>"
@@ -20,8 +20,15 @@ fi
 
 ARCHIVO="$1"
 
+# Verificar que el archivo existe
 if [ ! -f "$ARCHIVO" ]; then
     echo "ERROR: No se encontró el archivo: $ARCHIVO"
+    exit 1
+fi
+
+# Verificar que el archivo no está vacío
+if [ ! -s "$ARCHIVO" ]; then
+    echo "ERROR: El archivo está vacío: $ARCHIVO"
     exit 1
 fi
 
@@ -29,12 +36,16 @@ ESTADOS='OK|DONE|HECHO|ENCONTRADO|NO ENCONTRADO|NINGUNO|HABILITADO|DESHABILITADO
 
 echo "==============================================="
 echo " FRECUENCIA DE ESTADOS - AUDITORÍA LYNIS"
-echo " Archivo: $ARCHIVO"
 echo "==============================================="
+echo "Archivo analizado: $ARCHIVO"
+echo "-----------------------------------------------"
 printf "%-30s %10s\n" "ESTADO" "CANTIDAD"
 echo "-----------------------------------------------"
 
-grep -oE '\[[[:space:]]*[^][]+[[:space:]]*\]' "$ARCHIVO" \
+# Procesamiento
+sed 's/\x1B\[[0-9;]*[mK]//g' "$ARCHIVO" \
+    | tr -d '\r' \
+    | grep -oE '\[[[:space:]]*[^][]+[[:space:]]*\]' \
     | sed 's/^\[[[:space:]]*//; s/[[:space:]]*\]$//' \
     | grep -E "^($ESTADOS)$" \
     | sort \
@@ -44,5 +55,5 @@ grep -oE '\[[[:space:]]*[^][]+[[:space:]]*\]' "$ARCHIVO" \
         cantidad=$1;
         $1="";
         sub(/^ /,"");
-        printf "%-30s %10d\n",$0,cantidad
+        printf "%-30s %10d\n", $0, cantidad
     }'
