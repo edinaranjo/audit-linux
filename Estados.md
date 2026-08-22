@@ -22,3 +22,4 @@
 | **[DESCONOCIDO]**             | Lynis no pudo determinar el estado del elemento.                                                                          | Requiere verificación adicional.                                        |
 | **[SÍ] / [NO]**               | Respuesta directa al criterio específico que Lynis está comprobando.                                                      | Depende completamente de la pregunta evaluada.                          |
 
+Los estados entre corchetes de Lynis no representan necesariamente niveles de criticidad o riesgo. Su significado depende de la prueba que se esté ejecutando. El auditor debe interpretar cada resultado dentro de su contexto antes de determinar si constituye un hallazgo.
